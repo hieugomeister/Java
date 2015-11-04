@@ -1,0 +1,36 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+import java.io.*;
+
+class Playsound extends JFrame implements ActionListener
+{
+  JButton btn = new JButton("Play Sound");  
+  AudioClip sound;
+  public Playsound(String wavFile)
+  {
+	File wF = new File(wavFile);
+    setSize(300,100);
+    setLocation(400,300);
+    setDefaultCloseOperation(EXIT_ON_CLOSE);
+    JPanel jp = new JPanel();
+    btn.addActionListener(this);
+    jp.add(btn);
+    getContentPane().add(jp);
+    pack();
+    try
+	{
+		sound = Applet.newAudioClip(wF.toURL());
+		this.btn.doClick();
+	}
+    catch(Exception EX)
+	{
+		EX.printStackTrace();
+	}
+  }
+  public void actionPerformed(ActionEvent ae)
+  {
+	  sound.play();
+  }   
+}
